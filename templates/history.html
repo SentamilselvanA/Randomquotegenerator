@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Saved Quotes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Saved Quotes for {{ username }}</h1>
+    {% if quotes %}
+      <ul>
+        {% for q in quotes %}
+          <li>"{{ q.quote }}" — <strong>{{ q.author }}</strong></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No quotes saved yet.</p>
+    {% endif %}
+    <a href="{{ url_for('home') }}" class="btn">Back to Home</a>
+  </div>
+</body>
+</html>
