@@ -20,7 +20,6 @@ function fetchQuotes() {
     const quoteDiv = document.getElementById("quote");
     const quoteText = quoteDiv.innerText;
   
-    // Split by dash (any type) with optional spaces
     const parts = quoteText.split(/\s*[-–—]\s*/);
   
     if (parts.length < 2) {
@@ -29,7 +28,7 @@ function fetchQuotes() {
     }
   
     const quote = parts[0].trim();
-    const author = parts.slice(1).join(" ").trim(); // In case author name has dashes
+    const author = parts.slice(1).join(" ").trim(); 
   
     if (!quote || !author) {
       alert("Quote or author missing. Make sure to generate a quote first.");
@@ -65,7 +64,7 @@ function fetchQuotes() {
  
 
   function shareWhatsApp() {
-  event.preventDefault(); // Prevent default anchor behavior
+  event.preventDefault(); 
   const quoteText = document.getElementById('quote').innerText;
       window.open(`https://wa.me/?text=${encodeURIComponent(quoteText)}`);
 }
@@ -81,11 +80,13 @@ function fetchQuotes() {
   window.open(`https://www.reddit.com/submit?title=${encodeURIComponent(quoteText)}`);
 }
 
+
 function shareTelegram() {
   event.preventDefault();
   const quoteText = document.getElementById('quote').innerText;
   window.open(`https://t.me/share/url?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(quoteText)}`);
 }
+
 
 function shareFacebook() {
   event.preventDefault();
@@ -104,3 +105,19 @@ function shareFacebook() {
       window.location.href = '/history';
   }
   
+ function copyQuote() {
+  const quoteElement = document.getElementById('quote');
+  const textToCopy = quoteElement.textContent || quoteElement.innerText;
+
+  if (!textToCopy) {
+    alert('No quote to copy!');
+    return;
+  }
+
+  navigator.clipboard.writeText(textToCopy).then(() => {
+    alert('Quote copied to clipboard!');
+  }).catch(err => {
+    alert('Failed to copy quote: ' + err);
+  });
+}
+
